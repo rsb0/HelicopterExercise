@@ -6,12 +6,15 @@ import java.util.Stack;
 public class GameStateManager {
     private Stack<State> states;
 
+    //create an instance of GameStateManager
     private static GameStateManager instance = new GameStateManager();
 
+    //private constructor so new instances of GameStateManager cannot be created by other classes
     private GameStateManager(){
         states = new Stack<State>();
     }
 
+    //Global accesspoint for other classes to get the one instance of GameStateManager
     public static GameStateManager getInstance(){
         return instance;
     }
