@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Helicopter;
 
 public class PongLeftPaddle {
     private Texture paddleTexture;
     private Vector2 position;
+    private Vector2 center = new Vector2(0,0);
     private int SCREEN_HEIGHT;
     private int SCREEN_WIDTH;
 
@@ -76,6 +78,15 @@ Opens for the possibility of multiplayer game*/
 
     public Vector2 getPosition(){
         return position;
+    }
+
+    private void setCenter(){
+        center.set(paddleTexture.getWidth() / 2, getPosition().y + paddleTexture.getHeight() / 2);
+    }
+
+    public Vector2 getCenter(){
+        setCenter();
+        return center;
     }
 
     public Rectangle getBounds(){

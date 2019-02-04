@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Helicopter;
+import java.lang.Math;
 
 public class PongBall {
     //balls speed
@@ -16,11 +17,15 @@ public class PongBall {
     private boolean upHeading = true;
     private boolean rightHeading = true;
     private Rectangle bounds;   //Rectangle class used to detect collision with paddles
+    private Vector2 center = new Vector2(0,0);
 
     /*int values used to keep track of how many times the ball has crossed the left or right edge
     of screen*/
     private int leftScore;
     private int rightScore;
+
+    //The angle relative to the x-axis, with which the ball is moving
+    private double angle;
 
 
     public PongBall(){
@@ -29,6 +34,7 @@ public class PongBall {
         bounds = new Rectangle(position.x, position.y, ballTexture.getWidth(),ballTexture.getHeight());
         rightScore = 0;
         leftScore = 0;
+        angle = (Math.PI) /4;
     }
 
 
@@ -36,7 +42,7 @@ public class PongBall {
 
         //If the ball is heading up, add to the y-coordinate of the balls position
         if(upHeading){
-            position.add(0, SPEED * dt);
+            position.add(0, (float)Math.sin(angle) * SPEED * dt);
             //Check if outside top edge of screen, and if so, change heading
             if(position.y >= Helicopter.getScreenHeight() - ballTexture.getHeight()){
                 position.y = Helicopter.getScreenHeight() - ballTexture.getHeight();
@@ -45,7 +51,7 @@ public class PongBall {
         }
         //If the ball is heading down, subtract from the y-coordinate of the balls position
         else{
-            position.sub(0, SPEED * dt);
+            position.sub(0, (float)Math.sin(angle) * SPEED * dt);
             //Check if outside bottom edge of screen, and if so, change heading:
             if(position.y <= 0){
                 position.y = 0;
@@ -54,7 +60,7 @@ public class PongBall {
         }
         //If the ball is heading right, add to the x-coordinate of the balls position
         if(rightHeading){
-            position.add(SPEED * dt, 0);
+            position.add((float)Math.cos(angle) * SPEED * dt, 0);
             //Check if outside right edge of screen
             if(position.x >= Helicopter.getScreenWidth() - ballTexture.getWidth()){
                 //reset ball to center of screen
@@ -65,7 +71,7 @@ public class PongBall {
         }
         //If the ball is heading left, subtract from the x-coordinate of the balls position
         else{
-            position.sub(SPEED * dt, 0);
+            position.sub((float)Math.cos(angle) * SPEED * dt, 0);
             //check if outside left edge of screen
             if(position.x <= 0){
                 //reset ball to center of screen
@@ -83,20 +89,34 @@ public class PongBall {
 
     /*check for collision with right or left paddle. If collision is detected, change heading
     in x-direction*/
-    public void collision(Rectangle rightPaddleBounds, Rectangle leftPaddleBounds){
-        if(bounds.overlaps(rightPaddleBounds)){
+    public void collision(PongRightPaddle rightPaddle, PongLeftPaddle leftPaddle){
+        if(bounds.overlaps(rightPaddle.getBounds())){
             position.set(position.x - 10, position.y);
             rightHeading = !rightHeading;
+            angle = Math.atan(Math.abs(rightPaddle.getCenter().y - getBallCenter().y) /
+                    (rightPaddle.getCenter().x - getBallCenter().x));
         }
-        if(bounds.overlaps(leftPaddleBounds)){
+        if(bounds.overlaps(leftPaddle.getBounds())){
             position.set(position.x + 10, position.y);
             rightHeading = !rightHeading;
+            angle = Math.atan(Math.abs(leftPaddle.getCenter().y - getBallCenter().y) /
+                    (leftPaddle.getCenter().x - getBallCenter().x));
         }
     }
 
     public int getLeftScore(){ return leftScore; }
 
     public int getRightScore(){ return rightScore; }
+
+    public void setBalllCenter(){
+        center.set(getPosition().x + getBallTexture().getWidth() / 2, getPosition().y +
+                getBallTexture().getHeight() / 2);
+    }
+
+    public Vector2 getBallCenter(){
+        setBalllCenter();
+        return center;
+    }
 
     public Texture getBallTexture(){ return ballTexture; }
 

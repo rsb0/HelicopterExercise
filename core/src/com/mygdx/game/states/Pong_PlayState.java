@@ -44,7 +44,7 @@ public class Pong_PlayState extends State{
         //update paddles and ball
         rightPaddle.manualUpdate(dt);
         leftPaddle.autoUpdate(dt);
-        ball.collision(rightPaddle.getBounds(), leftPaddle.getBounds());
+        ball.collision(rightPaddle, leftPaddle);
     }
 
     @Override

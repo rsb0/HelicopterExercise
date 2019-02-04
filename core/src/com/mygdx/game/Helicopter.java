@@ -10,8 +10,8 @@ import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
 
 public class Helicopter extends ApplicationAdapter {
-	public static int WIDTH = 1080;
-	public static int HEIGHT = 720;
+	public static int WIDTH = 800;
+	public static int HEIGHT = 600;
 	public static final String TITLE = "Helicopter Task 1, 2, and 3";
 	private SpriteBatch batch;
 	private GameStateManager gsm;

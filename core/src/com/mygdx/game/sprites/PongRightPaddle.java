@@ -17,6 +17,7 @@ public class PongRightPaddle {
     private int SCREEN_HEIGHT;
     private Rectangle bounds;   //Rectangle class used to detect collision with ball
     private PongBall ball;
+    private Vector2 center = new Vector2(0,0);
 
     /*Constructor takes in Screen width as well as screen height in order to place paddle correctly
     on right edge of the screen*/
@@ -76,8 +77,19 @@ public class PongRightPaddle {
         return paddleTexture;
     }
 
+    //position of bottom left corner of texture
     public Vector2 getPosition(){
         return position;
+    }
+
+
+    private void setCenter(){
+        center.set(getPosition().x + getTexture().getWidth() / 2, getPosition().y + getTexture().getHeight() / 2);
+    }
+
+    public Vector2 getCenter(){
+        setCenter();
+        return center;
     }
 
     public Rectangle getBounds(){
