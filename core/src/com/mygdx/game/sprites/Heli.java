@@ -7,12 +7,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Helicopter;
 
+/*
+------This is the class used in task 1 and 2 to update and render helicopter on screen------
+autoUpdate-method updates the helicopter's position on screen automatically
+
+manualUpdate method polls for input from arrow-buttons on keyboard to update helicopter position
+on screen
+ */
+
+
 public class Heli {
 
     private Texture heliTexture;
     private Sprite heliSprite;
     private int SPEED;
     private Vector2 position;
+    //boolean values for keeping track of helicopter's heading in the x- and y-directions
     private boolean rightHeading;
     private boolean upHeading;
 
@@ -25,16 +35,23 @@ public class Heli {
         upHeading = true;
     }
 
-    //update method used for Task1:
+    /*update method used for Task1:
+    Checks heading and position of helicopter on screen and updates the new position to be rendered.
+    If helicopter touches vertical screen edges the sprite is flipped and heading
+    reversed in the x-direction.
+    If helicopter touches horisontal screen edges the heading is reversed in
+    the y-direction, but sprite is not flipped.
+     */
     public void autoUpdate(float dt){
         if(rightHeading) {
             position.x += SPEED * Gdx.graphics.getDeltaTime();
 
             //Check if helicopter has passed the right edge of the screen.
             if(position.x > Helicopter.getScreenWidth() - (heliTexture.getWidth() * 0.7f)){
-                //set x-position to right edge of screen
+                //if true: set x-position to right edge of screen
                 position.x = Helicopter.getScreenWidth() - (heliTexture.getWidth() * 0.7f);
-                rightHeading = false;   //reverse heading in x-direction
+                //reverse heading in x-direction
+                rightHeading = false;
                 heliSprite.flip(true,false);
             }
         }
@@ -67,6 +84,8 @@ public class Heli {
     }
 
     public void manualUpdate(float dt){
+
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             //Check helicopter's heading
             if (!rightHeading) {

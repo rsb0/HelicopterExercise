@@ -28,14 +28,17 @@ public class PongLeftPaddle {
         this.ball = ball;
     }
 
+    /*Used for manually playing the game. Checks for key input W = UP or S = DOWN,
+and moves the paddle up or down accordingly. Not in use in current implementation.
+Opens for the possibility of multiplayer game*/
     public void manualUpdate(float dt){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
             position.add(0, SPEED * dt);
         }
         if(position.y + paddleTexture.getHeight() >= SCREEN_HEIGHT) {
             position.y = SCREEN_HEIGHT - paddleTexture.getHeight();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if(Gdx.input.isKeyPressed(Input.Keys.S)){
             position.sub(0, SPEED * dt);
         }
         if(position.y <= 0){

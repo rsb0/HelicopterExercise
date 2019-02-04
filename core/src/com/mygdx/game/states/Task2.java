@@ -31,8 +31,11 @@ public class Task2 extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
+        //draw helicopter on screen
         sb.draw(heli.getHeliSprite(), heli.getPosition().x, heli.getPosition().y,
                 heli.getTextureWidth() * 0.7f, heli.getTextureHeight() * 0.7f);
+
+        //draw helicopter's position on left upper corner of screen
         pos.draw(sb, "position:\nx: " + (heli.getPosition().x + heli.getTextureWidth() / 2) +
                         "\ny: " + (heli.getPosition().y + heli.getTextureHeight() / 2),
                 0, Helicopter.getScreenHeight() - 20);

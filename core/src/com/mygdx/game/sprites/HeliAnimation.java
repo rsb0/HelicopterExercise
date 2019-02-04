@@ -8,18 +8,23 @@ import com.mygdx.game.Helicopter;
 
 import java.util.Random;
 
+/*----This is the class used in task 1 and 2 to update, animate and render helicopter on screen----
+Keeps an Array or TextureRegions. Loops through the Array of TextureRegion and renders the current
+frame. Frames are switched every 100 ms to create animation effect.
+*/
 public class HeliAnimation {
     private int SPEED;
 
     private Array<TextureRegion> frames;
     private float maxFrameTime, currentFrameTime;
 
-    /*frameCount = number of frames in TextureRegion.
-    frame = integer value telling which frame in
-    in TextureRegion is currently being rendered.
+    /*
+    frameCount = number of frames in TextureRegion.
+    frame = integer value telling which frame in TextureRegion is currently being rendered.
     regionWidth = width of one frame = (width of whole TextureRegion) / frameCount
     regionHeight = height of textureRegion*/
     private int frameCount, frame, regionWidth, regionHeight;
+
     private Vector2 position;
     private boolean rightHeading = false, upHeading = true;
     private float changeDirectionCountdown;
@@ -27,9 +32,11 @@ public class HeliAnimation {
     private Random rand;
 
 
-    /*constructor takes in TextureRegion, total number of frames in TextureRegion,
-    cycleTime = total time it takes to cycle through all frames in TextureRegion,
-    and x and y coordinates of where the texture will be rendered on the first call
+    /*constructor takes in:
+    - TextureRegion
+    - total number of frames in TextureRegion.
+    - cycleTime = total time it takes to cycle through all frames in TextureRegion.
+    - x and y coordinates of where the texture will be rendered on the first call
     to render-method*/
     public HeliAnimation(TextureRegion region, int frameCount, float cycleTime, int startX, int startY){
         frames = new Array<TextureRegion>();
