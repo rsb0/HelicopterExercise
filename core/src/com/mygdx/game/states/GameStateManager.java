@@ -1,14 +1,19 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import java.util.Stack;
 
 public class GameStateManager {
     private Stack<State> states;
 
-    public GameStateManager(){
+    private static GameStateManager instance = new GameStateManager();
+
+    private GameStateManager(){
         states = new Stack<State>();
+    }
+
+    public static GameStateManager getInstance(){
+        return instance;
     }
 
     //add a new state to the top of the state-stack

@@ -18,8 +18,8 @@ public class Helicopter extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		gsm = new GameStateManager();
+		this.batch = new SpriteBatch();
+		this.gsm = GameStateManager.getInstance();
 		gsm.push(new MenuState(gsm));
 
 	}
