@@ -10,17 +10,18 @@ import com.mygdx.game.sprites.Heli;
 public class Task1 extends State{
     private Heli heli;
     private BitmapFont text;
+    private GameStateManager gsm;
 
-    public Task1(GameStateManager gsm) {
-        super(gsm);
+    public Task1() {
         heli = new Heli(300,300,300);
         text = new BitmapFont();
+        this.gsm = GameStateManager.getInstance();
     }
 
     @Override
     public void upDate(float dt) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new MenuState());
         }
         heli.autoUpdate(dt);
 

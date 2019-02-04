@@ -18,9 +18,10 @@ public class Pong_PlayState extends State{
     private BitmapFont scoreOutput;
     private Texture medianDevider;
     private Texture background;
+    private GameStateManager gsm;
 
-    public Pong_PlayState(GameStateManager gsm){
-        super(gsm);
+    public Pong_PlayState(){
+        this.gsm = GameStateManager.getInstance();
         ball = new PongBall();
         rightPaddle = new PongRightPaddle(ball);
         leftPaddle = new PongLeftPaddle(ball);
@@ -32,14 +33,14 @@ public class Pong_PlayState extends State{
     @Override
     public void upDate(float dt) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            gsm.set(new Pong_MenuState(gsm));
+            gsm.set(new Pong_MenuState());
         }
         ball.upDate(dt);
 
         //Test to see if either side has a winning score
         if(ball.getLeftScore() == 21 || ball.getRightScore() == 21){
             //pop current state and push gameOver-state on top of GameStateManager's state-stack
-            gsm.set(new Pong_EndState(gsm, ball.getRightScore(), ball.getLeftScore()));
+            gsm.set(new Pong_EndState(ball.getRightScore(), ball.getLeftScore()));
         }
         //update paddles and ball
         rightPaddle.manualUpdate(dt);

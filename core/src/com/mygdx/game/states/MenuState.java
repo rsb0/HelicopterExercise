@@ -17,10 +17,10 @@ public class MenuState extends State{
     private Texture task3Highlight;
     private Texture pongHighlight;
     private int task;
+    private GameStateManager gsm;
 
 
-    public MenuState(GameStateManager gsm) {
-        super(gsm);
+    public MenuState() {
         task1 = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\Task1.png");
         task2 = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\Task2.png");
         task3 = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\Task3.png");
@@ -30,13 +30,14 @@ public class MenuState extends State{
         task3Highlight = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\Task3_highlight.png");
         pongHighlight = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\PongHighlight.png");
         task = 1;
+        gsm = GameStateManager.getInstance();
     }
 
     @Override
     public void upDate(float dt) {
         if(task == 1){
             if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-                gsm.set(new Task1(gsm));
+                gsm.set(new Task1());
             }
 
            if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
@@ -48,7 +49,7 @@ public class MenuState extends State{
        }
        else if(task == 2){
             if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-                gsm.set(new Task2(gsm));
+                gsm.set(new Task2());
             }
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
@@ -60,7 +61,7 @@ public class MenuState extends State{
         }
         else if(task == 3){
             if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-                gsm.set(new Task3(gsm));
+                gsm.set(new Task3());
             }
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
@@ -72,7 +73,7 @@ public class MenuState extends State{
         }
         else if(task == 4){
             if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-                gsm.set(new Pong_MenuState(gsm));
+                gsm.set(new Pong_MenuState());
             }
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){

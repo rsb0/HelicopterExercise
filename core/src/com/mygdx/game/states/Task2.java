@@ -12,18 +12,19 @@ public class Task2 extends State {
     private Heli heli;
     private BitmapFont pos;
     private BitmapFont text;
+    private GameStateManager gsm;
 
-    public Task2(GameStateManager gsm) {
-        super(gsm);
+    public Task2() {
         heli = new Heli(300, 300,300);
         pos = new BitmapFont();
         text = new BitmapFont();
+        this.gsm = GameStateManager.getInstance();
     }
 
     @Override
     public void upDate(float dt) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new MenuState());
         }
         heli.manualUpdate(dt);
     }

@@ -12,10 +12,13 @@ public class Pong_EndState extends State{
     private String winner;
     private int scoreRight;
     private int scoreLeft;
+    private GameStateManager gsm;
 
-    public Pong_EndState(GameStateManager gsm, int scoreRight, int scoreLeft) {
-        super(gsm);
-        gameOverTexture = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\gameover.png");
+    public Pong_EndState(int scoreRight, int scoreLeft) {
+        gsm = GameStateManager.getInstance();
+
+        gameOverTexture = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\" +
+                "programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\gameover.png");
         this.scoreLeft = scoreLeft;
         this.scoreRight = scoreRight;
         endOutput = new BitmapFont();
@@ -28,7 +31,7 @@ public class Pong_EndState extends State{
     }
     public void upDate(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new MenuState());
         }
     }
     public void render(SpriteBatch sb){

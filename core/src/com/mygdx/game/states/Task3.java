@@ -17,9 +17,10 @@ public class Task3 extends State{
     private HeliAnimation heli2;
     private HeliAnimation heli3;
     private BitmapFont text;
+    private GameStateManager gsm;
+    public Task3() {
 
-    public Task3(GameStateManager gsm) {
-        super(gsm);
+        this.gsm = GameStateManager.getInstance();
 
         text = new BitmapFont();
         heliSheet = new Texture("C:\\Users\\Rune\\Documents\\skole\\v2019\\programvarearkitektur\\oving1\\Source Codes\\Helicopter\\android\\assets\\HeliSpriteSheet.png");
@@ -36,7 +37,7 @@ public class Task3 extends State{
     @Override
     public void upDate(float dt) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new MenuState());
         }
 
         //check for collision between heli 1 and 2, and update with collision condition = true

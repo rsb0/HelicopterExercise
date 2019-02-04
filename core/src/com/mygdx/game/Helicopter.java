@@ -20,7 +20,7 @@ public class Helicopter extends ApplicationAdapter {
 	public void create () {
 		this.batch = new SpriteBatch();
 		this.gsm = GameStateManager.getInstance();
-		gsm.push(new MenuState(gsm));
+		gsm.push(new MenuState());
 
 	}
 
