@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Helicopter;
+import com.mygdx.game.sprites.Heli;
 
 public class Pong_MenuState extends State{
     private Texture startScreen;
@@ -28,7 +29,7 @@ public class Pong_MenuState extends State{
     }
     public void render(SpriteBatch sb){
         sb.begin();
-        sb.draw(startScreen, 0,0, 1080, 720);
+    sb.draw(startScreen, 0,0, Helicopter.getScreenWidth(), Helicopter.getScreenHeight());
         font.draw(sb, "Press ENTER to start", (Helicopter.getScreenWidth() / 2) - 80,
                 Helicopter.getScreenHeight() / 4);
         sb.end();

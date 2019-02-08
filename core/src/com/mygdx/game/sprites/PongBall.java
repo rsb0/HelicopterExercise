@@ -42,6 +42,7 @@ public class PongBall {
 
         //If the ball is heading up, add to the y-coordinate of the balls position
         if(upHeading){
+            System.out.println("angle: " + angle + "\nsin: " + Math.sin(angle) + "\ncos: " + Math.cos(angle));
             position.add(0, (float)Math.sin(angle) * SPEED * dt);
             //Check if outside top edge of screen, and if so, change heading
             if(position.y >= Helicopter.getScreenHeight() - ballTexture.getHeight()){
@@ -93,14 +94,15 @@ public class PongBall {
         if(bounds.overlaps(rightPaddle.getBounds())){
             position.set(position.x - 10, position.y);
             rightHeading = !rightHeading;
-            angle = Math.atan(Math.abs(rightPaddle.getCenter().y - getBallCenter().y) /
+            angle = Math.atan((Math.abs(getBallCenter().y - rightPaddle.getCenter().y)) /
                     (rightPaddle.getCenter().x - getBallCenter().x));
+
         }
         if(bounds.overlaps(leftPaddle.getBounds())){
             position.set(position.x + 10, position.y);
             rightHeading = !rightHeading;
-            angle = Math.atan(Math.abs(leftPaddle.getCenter().y - getBallCenter().y) /
-                    (leftPaddle.getCenter().x - getBallCenter().x));
+            angle = Math.atan((Math.abs(getBallCenter().y - leftPaddle.getCenter().y)) /
+                    (getBallCenter().x - leftPaddle.getCenter().x));
         }
     }
 
